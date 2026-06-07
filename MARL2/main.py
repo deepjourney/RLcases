@@ -130,7 +130,7 @@ def trainloop(args):
                 plt.figure()
                 plt.plot(last_scores_means)
                 plt.axvline(x=np.argmax(np.array(last_scores_means)))
-                plt.savefig(args.exp_dir+str(args.env_seed)+'_curve.png', figsize=(16, 9), dpi=300, facecolor="azure", bbox_inches='tight', pad_inches=0)
+                plt.savefig(args.exp_dir+str(args.env_seed)+'_curve.png', dpi=300, facecolor="azure", bbox_inches='tight', pad_inches=0)
                 plt.close()
         except KeyboardInterrupt:
             if not args.optuna: agent.save(str(args.env_seed)+'_'+str(t))
@@ -138,7 +138,7 @@ def trainloop(args):
                 plt.figure()
                 plt.plot(last_scores_means)
                 plt.axvline(x=np.argmax(np.array(last_scores_means)))
-                plt.savefig(args.exp_dir+str(args.env_seed)+'_curve.png', figsize=(16, 9), dpi=300, facecolor="azure", bbox_inches='tight', pad_inches=0)
+                plt.savefig(args.exp_dir+str(args.env_seed)+'_curve.png', dpi=300, facecolor="azure", bbox_inches='tight', pad_inches=0)
                 plt.close()
     try:    env.close()
     except: pass
@@ -229,7 +229,7 @@ def optunaloop(args):
             print(scorei,end=',',file=foptunacurve)
     plt.figure()
     plt.plot(scores)
-    plt.savefig('results/optunacurve.png', figsize=(16, 9), dpi=300, facecolor="azure", bbox_inches='tight', pad_inches=0)
+    plt.savefig('results/optunacurve.png', dpi=300, facecolor="azure", bbox_inches='tight', pad_inches=0)
     plt.close()
 def main():
     parser = argparse.ArgumentParser(description='RL')
