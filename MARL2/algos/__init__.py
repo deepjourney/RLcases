@@ -62,14 +62,19 @@ class PTAlgo():
     def create_scheduler(self,optimizer):
         scheduler = None
         decayparas = self.args.decayparas.split(',') # eta_min_ratio, T_2, exp_gamma
+        def _get(idx, default, cast):
+            return cast(decayparas[idx]) if idx < len(decayparas) and decayparas[idx] != '' else default
+        eta_ratio = _get(0, 0.0, float)
+        T_2       = _get(1, self.args.max_train_steps, int)  # default: single cycle over whole training
+        gamma     = _get(2, 1.0, float)                      # default: no per-cycle decay
         if self.args.decay=='const':  pass
-        if self.args.decay=='linear': self.eta_min_ratio = float(decayparas[0])
-        if self.args.decay=='exp':    scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma=float(decayparas[2]))
-        if self.args.decay=='cos':    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=int(decayparas[1]), eta_min=float(decayparas[0])*self.args.lr)
-        if self.args.decay=='coscos': scheduler = CyclicCosAnnealingLR(optimizer,milestones=self._doublestones(self.args.max_train_steps, int(decayparas[1])),
-                                    decay_milestones=None,                                                              eta_min=float(decayparas[0])*self.args.lr)
-        if self.args.decay=='cosdec': scheduler = CyclicCosAnnealingLR(optimizer,milestones=self._doublestones(self.args.max_train_steps, int(decayparas[1])),
-                                    decay_milestones=self._doublestones(self.args.max_train_steps, int(decayparas[1])), eta_min=float(decayparas[0])*self.args.lr, gamma=float(decayparas[2]))
+        if self.args.decay=='linear': self.eta_min_ratio = eta_ratio
+        if self.args.decay=='exp':    scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma=gamma)
+        if self.args.decay=='cos':    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=T_2, eta_min=eta_ratio*self.args.lr)
+        if self.args.decay=='coscos': scheduler = CyclicCosAnnealingLR(optimizer,milestones=self._doublestones(self.args.max_train_steps, T_2),
+                                    decay_milestones=None,                                                          eta_min=eta_ratio*self.args.lr)
+        if self.args.decay=='cosdec': scheduler = CyclicCosAnnealingLR(optimizer,milestones=self._doublestones(self.args.max_train_steps, T_2),
+                                    decay_milestones=self._doublestones(self.args.max_train_steps, T_2), eta_min=eta_ratio*self.args.lr, gamma=gamma)
         return scheduler
     def update_scheduler(self,crt_step,max_step,scheduler,optimizer):
         if self.args.decay=='const': return
