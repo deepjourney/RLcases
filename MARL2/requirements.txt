@@ -7,5 +7,4 @@ joblib
 easydict
 pygame
 scikit-video
-gymnasium[atari]
-AutoROM
+stable-baselines3[extra]
