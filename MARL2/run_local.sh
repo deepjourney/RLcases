@@ -43,9 +43,15 @@ EXTRA_ARGS="--plotscore"       # 其它开关
 
 echo "=== 启动训练: $ENV_NAME (env-num=$ENV_NUM) ==="
 mkdir -p "$RESULTS_DIR"
+
+# 过滤 stderr 上的无害噪音（macOS 的 SDL 重复类 / pkg_resources 弃用 / ALE 启动 banner）。
+# 进度条已改走 stdout，不受过滤影响；真正的报错/traceback 仍会照常显示。
+NOISE='objc\[|implemented in both|libSDL2|pkg_resources is deprecated|from pkg_resources import|Powered by Stella|^A\.L\.E'
+
 python main.py \
     --env-name "$ENV_NAME" \
     --gameflag "$GAMEFLAG" \
     --env-num "$ENV_NUM" \
     --results-dir "$RESULTS_DIR" \
-    $EXTRA_ARGS
+    $EXTRA_ARGS \
+    2> >(grep -vE "$NOISE" >&2)

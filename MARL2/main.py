@@ -4,7 +4,7 @@ from collections import deque
 from statistics import mean, stdev
 import matplotlib.pyplot as plt
 import cProfile, pstats
-import random, os, time, copy
+import random, os, time, copy, sys
 import argparse, json, pprint, tqdm
 import envirs, agents, algos
 from algos.optunasetting import optunasetting, optunascoring
@@ -52,7 +52,7 @@ def trainloop(args):
     print(args.env_seed,':',args.fin_seed)
     if args.to_test:
         agent.load()
-        for t in tqdm.tqdm(range(int(args.max_train_steps*args.testlength))):
+        for t in tqdm.tqdm(range(int(args.max_train_steps*args.testlength)), file=sys.stdout):
             if args.render: env.render(mode='rgb_array')
             act, act_info = agent.getaction(obs,explore=False)
             new_obs, rew, done, info = env.step(act)
@@ -65,7 +65,7 @@ def trainloop(args):
         try:
             savepoint = list(np.array([i for i in range(1,args.savenum)])*args.max_train_steps//args.savenum)
             print(savepoint)
-            iterator = tqdm.auto.tqdm(range(args.max_train_steps))
+            iterator = tqdm.auto.tqdm(range(args.max_train_steps), file=sys.stdout)
             for t in iterator:
                 if args.timer: iterator_forward_start = get_time()
                 for n in range(args.roll_num):
