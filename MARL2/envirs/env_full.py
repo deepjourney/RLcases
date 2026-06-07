@@ -13,6 +13,8 @@ from envirs.warppers import Recorder, Monitor, wrap_deepmind_render
 
 def env_maker(env_name, i, env_seed, args):
     def __make_env():
+        import ale_py as _ale_py, gymnasium as _gym
+        _gym.register_envs(_ale_py)  # must run inside each subprocess
         render_mode = 'rgb_array' if args.render else None
         if args.gameflag == 'atari':
             env = gym.make(env_name, render_mode=render_mode)
