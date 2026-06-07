@@ -25,8 +25,8 @@ def trainloop(args):
         step_forward_time, agent_update_time, other_in_iterator_time = 0, 0, 0
         agent_getaction_time, env_step_time, agent_memoexps_time = 0, 0, 0
         savepoint_time, optuna_stop_time = 0, 0
+    last_scores = deque(maxlen=100)
     if args.plotscore:
-        last_scores = deque(maxlen=100)
         last_scores_best = float("-inf")
         last_scores_means = []
     print(args.env_seed,':',args.fin_seed)
@@ -45,7 +45,7 @@ def trainloop(args):
         try:
             savepoint = list(np.array([i for i in range(1,args.savenum)])*args.max_train_steps//args.savenum)
             print(savepoint)
-            iterator = tqdm.tqdm(range(args.max_train_steps))
+            iterator = tqdm.auto.tqdm(range(args.max_train_steps))
             for t in iterator:
                 if args.timer: iterator_forward_start = get_time()
                 for n in range(args.roll_num):
@@ -56,19 +56,19 @@ def trainloop(args):
                     if args.timer: env_step_start = get_time()
                     new_obs, rew, done, info = env.step(act)#must create a new_obs each step
                     if args.timer: env_step_time += get_time()-env_step_start
+                    for infoi in info:
+                        score_key = optunascoring() if args.optuna else 'last_score'
+                        if score_key in infoi:
+                            last_scores.append(infoi[score_key])
                     if args.plotscore:
-                        for infoi in info:#enumerate(info):
-                            if args.optuna:
-                                last_score_name = optunascoring()
-                                if last_score_name in infoi:
-                                    last_scores.append(infoi[last_score_name])
-                            else:
-                                if 'last_score' in infoi:
-                                    last_scores.append(infoi['last_score'])
-                        if n%args.roll_num==0 and t%(args.max_train_steps//100)==0:#len(last_scores) == last_scores.maxlen:
+                        if n%args.roll_num==0 and t%(args.max_train_steps//100)==0:
                             if len(last_scores)!=0:
                                 last_scores_mean = mean(last_scores)
                                 last_scores_means.append(last_scores_mean)
+                    if n%args.roll_num==0 and t%(max(1,args.max_train_steps//200))==0:
+                        elapsed = (time.time()-starttime)/60
+                        score_str = f'{mean(last_scores):.2f}' if last_scores else 'n/a'
+                        iterator.set_postfix(score=score_str, elapsed_min=f'{elapsed:.1f}')
                             #if last_scores_mean >= last_scores_best and t > args.max_train_steps*0.8:
                             #    last_scores_best = last_scores_mean
                             #    agent.save(str(args.env_seed))#+'_'+str(t))
