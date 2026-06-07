@@ -165,7 +165,6 @@ class Algo(algos.PTAlgo):
     def update(self, crt_step, max_step, info_in):
         #return
         if self.args.timer: self.Algo_get_update_pre_start = self.process_time()
-        self.update_scheduler(crt_step,max_step,self.scheduler,self.optimizer)
         if self.args.memoplace == "algocpu" or self.args.memoplace == "algogpu":
             self.mb_obs    = info_in['mb_obs']
             self.mb_act    = info_in['mb_act']
@@ -262,6 +261,7 @@ class Algo(algos.PTAlgo):
         if self.args.timer: self.Algo_get_update_syn += self.process_time()-self.Algo_get_update_syn_start
         if self.args.opt!='Acktr': nn.utils.clip_grad_norm_(self.model.parameters(),self.args.max_grad_norm)
         self.optimizer.step()
+        self.update_scheduler(crt_step,max_step,self.scheduler,self.optimizer)
         if self.args.timer: self.Algo_get_update_crt += self.process_time()-self.Algo_get_update_crt_start
         return value_loss.item(), action_loss.item(), dist_entropy.item()
 

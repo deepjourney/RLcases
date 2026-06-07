@@ -94,7 +94,6 @@ class Algo(algos.PTAlgo):
     def update(self, crt_step, max_step, info_in):
         if debug: print('update')
         if debug: fdebug = open('debuglogs','w')
-        self.update_scheduler(crt_step,max_step,self.scheduler,self.optimizer)
         if self.args.memoplace == "algocpu" or self.args.memoplace == "algogpu":
             self.mb_obs    = info_in['mb_obs']
             self.mb_act    = info_in['mb_act']
@@ -204,6 +203,7 @@ class Algo(algos.PTAlgo):
         value_loss_epoch /= num_updates
         action_loss_epoch /= num_updates
         dist_entropy_epoch /= num_updates
+        self.update_scheduler(crt_step,max_step,self.scheduler,self.optimizer)
         return value_loss_epoch, action_loss_epoch, dist_entropy_epoch
 
 def fAlgo(obs_space,act_space,args):
