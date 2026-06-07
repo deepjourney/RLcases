@@ -15,14 +15,13 @@
 # ============================================================================
 set -e
 
-# --- 切到脚本所在目录下的 MARL2 ---
+# --- 切到脚本所在目录 (MARL2) ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
 # --- 1. 拉最新代码 ---
 echo "=== 拉取最新代码 (git pull origin main) ==="
 git pull origin main || echo "(git pull 失败，先用本地现有代码继续)"
-cd "$SCRIPT_DIR/MARL2"
 
 # --- 2. 依赖检查 ---
 echo "=== 检查依赖 ==="
