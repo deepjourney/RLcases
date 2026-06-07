@@ -84,7 +84,7 @@ class Algo(algos.PTAlgo):
     def __init__(self,obs_space,act_space,args):
         algos.PTAlgo.__init__(self,obs_space,act_space,args)
         self.obs_space, self.act_space, self.args = obs_space, act_space, args
-        self.device = torch.device("cuda:0")
+        self.device = algos.get_device()
         self.model = Policy(obs_space,act_space,args,self.device)
         self.optimizer = self.create_optimizer(self.model)
         self.scheduler = self.create_scheduler(self.optimizer)

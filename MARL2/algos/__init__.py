@@ -42,6 +42,18 @@ def getAlgo(obs_space,act_space,args):
 import torch,math,os,glob
 from PTparts.kfac import KFACOptimizer
 from PTparts.cyclicLR import CyclicCosAnnealingLR
+
+def get_device():
+    """Pick a training device that works on the current machine.
+    Priority: CUDA (NVIDIA GPU) -> CPU. Set RLCASES_DEVICE to override,
+    e.g. RLCASES_DEVICE=mps to try Apple Silicon, or RLCASES_DEVICE=cpu to force CPU."""
+    forced = os.environ.get('RLCASES_DEVICE', '').strip().lower()
+    if forced:
+        return torch.device(forced)
+    if torch.cuda.is_available():
+        return torch.device('cuda:0')
+    return torch.device('cpu')
+
 class PTAlgo():
     def __init__(self,obs_space,act_space,args):
         self.obs_space, self.act_space, self.args = obs_space, act_space, args
@@ -97,7 +109,7 @@ class PTAlgo():
         print('load_model',[fname.split('/')[-1] for fname in flist])
         ffile = max(flist, key=os.path.getmtime)#ctime)
         print('load_model',ffile.split('/')[-1])
-        return torch.load(ffile),ffile
+        return torch.load(ffile, map_location=get_device()),ffile
     def memoexps(self, new_obs, rew, done, info):
         pass
     def save(self,name,prefix=''):
