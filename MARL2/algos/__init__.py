@@ -49,10 +49,15 @@ def get_device():
     e.g. RLCASES_DEVICE=mps to try Apple Silicon, or RLCASES_DEVICE=cpu to force CPU."""
     forced = os.environ.get('RLCASES_DEVICE', '').strip().lower()
     if forced:
-        return torch.device(forced)
-    if torch.cuda.is_available():
-        return torch.device('cuda:0')
-    return torch.device('cpu')
+        dev = torch.device(forced)
+    elif torch.cuda.is_available():
+        dev = torch.device('cuda:0')
+    else:
+        dev = torch.device('cpu')
+    if not getattr(get_device, '_printed', False):
+        print('[get_device] using device:', dev)
+        get_device._printed = True
+    return dev
 
 class PTAlgo():
     def __init__(self,obs_space,act_space,args):

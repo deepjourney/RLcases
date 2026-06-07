@@ -44,6 +44,9 @@ EXTRA_ARGS="--plotscore"       # 其它开关
 # ============================================================================
 
 # --- 解析命令行覆盖参数（透传给 main.py，同时更新上面的变量用于日志打印）---
+# --device 不是 main.py 的参数，单独处理：设置 RLCASES_DEVICE 让 get_device() 选用，
+# 选 mps（Apple GPU）时自动开启算子回落，避免不支持的算子直接报错。
+DEVICE=""
 OVERRIDE_ARGS=()
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -51,9 +54,16 @@ while [[ $# -gt 0 ]]; do
         --gameflag)    GAMEFLAG="$2";    shift 2 ;;
         --env-num)     ENV_NUM="$2";     shift 2 ;;
         --results-dir) RESULTS_DIR="$2"; shift 2 ;;
+        --device)      DEVICE="$2";      shift 2 ;;   # cpu | mps | cuda:0
         *)             OVERRIDE_ARGS+=("$1"); shift ;;  # 其余参数直接透传给 main.py
     esac
 done
+
+if [[ -n "$DEVICE" ]]; then
+    export RLCASES_DEVICE="$DEVICE"
+    if [[ "$DEVICE" == mps* ]]; then export PYTORCH_ENABLE_MPS_FALLBACK=1; fi
+    echo "=== 指定 device: $DEVICE ==="
+fi
 
 echo "=== 启动训练: $ENV_NAME (env-num=$ENV_NUM) ==="
 mkdir -p "$RESULTS_DIR"
