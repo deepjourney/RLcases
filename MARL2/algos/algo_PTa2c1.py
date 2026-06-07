@@ -7,7 +7,7 @@ class Policy(nn.Module):
         super(Policy, self).__init__()
         self.obs_space, self.act_space, self.args = obs_space, act_space, args
         self.device = device
-        if args.aprxfunc in ('cnn2d', 'cnnmlp'):
+        if args.aprxfunc=='cnn2d':
             apfparas = args.apfparas.split('=')
             cnncnnparas = apfparas[0].split('^')
             cnnmlpparas = apfparas[1].split('^')
