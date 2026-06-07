@@ -40,14 +40,15 @@ ENV_NAME="BreakoutNoFrameskip-v4"
 GAMEFLAG="atari"
 ENV_NUM=8                      # 本地 CPU 建议 6~8；Colab GPU 可改大（32/64）
 RESULTS_DIR="./outputs"        # 结果/曲线图输出目录（本地）
-# 下面这套是验证过能让 Breakout 上 500 分的配方（源自旧 mainbash Atari 段）：
+# Breakout 配方（让分数能上 400~500 的关键设置）：
 #   stack-num 4  : Atari 标准 4 帧堆叠，让网络感知球的运动方向/速度（最关键，缺了学不好）
 #   decay linear : 学习率从 7e-4 线性降到 1%（你旧实验用的就是 linear，不是 cosdec）
-#   cnn2d + apfparas: 旧实验用的卷积网络（末尾多一个 7x7 卷积层）
+#   cnnmlp + 标准 Nature CNN：3 层卷积(8x8/4, 4x4/2, 3x3/1)+FC512，单智能体图像专用，
+#     CNNBase 会自动把 stack 帧并到通道维（cnn2d 是给多智能体 3D 输入的，不能用在这）
 STACK_NUM=4
 DECAY="linear"
-APRXFUNC="cnn2d"
-APFPARAS="8,8,4,4,32,1^4,4,2,2,64,1^3,3,1,1,64,1^7,7=512"
+APRXFUNC="cnnmlp"
+APFPARAS="8,8,4,4,32,1^4,4,2,2,64,1^3,3,1,1,64,1=512=64"
 EXTRA_ARGS="--plotscore --stack-num $STACK_NUM --decay $DECAY --aprxfunc $APRXFUNC --apfparas $APFPARAS"
 # ============================================================================
 
