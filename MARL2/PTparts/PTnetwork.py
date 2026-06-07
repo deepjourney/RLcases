@@ -10,6 +10,35 @@ def init(module, weight_init, bias_init, gain=1):
 class Flatten(nn.Module):
     def forward(self, x):
         return x.reshape(x.size(0), -1)
+
+class CNNBase(nn.Module):
+    """Single-agent CNN. Input: (batch, stack, H, W, C) → merged to (batch, stack*C, H, W)."""
+    def __init__(self, num_inputs, num_outputs, paraslist):
+        super(CNNBase, self).__init__()
+        print('CNNBase', paraslist)
+        init_ = lambda m: init(m, nn.init.orthogonal_, lambda x: nn.init.constant_(x, 0), nn.init.calculate_gain('relu'))
+        layers = []
+        layer_inputs = num_inputs
+        for paras in paraslist:
+            para = [int(p) for p in paras.split(',')]
+            # format: kh, kw, sh, sw, out_ch, flag
+            layers.append(init_(nn.Conv2d(layer_inputs, para[4], kernel_size=(para[0], para[1]), stride=(para[2], para[3]))))
+            layers.append(nn.ReLU())
+            layer_inputs = para[4]
+        layers.append(Flatten())
+        layers.append(nn.LazyLinear(num_outputs))
+        layers.append(nn.ReLU())
+        self.main = nn.Sequential(*layers)
+        init_ = lambda m: init(m, nn.init.orthogonal_, lambda x: nn.init.constant_(x, 0))
+        self.critic_linear = init_(nn.Linear(num_outputs, 1))
+        self.num_outputs = num_outputs
+        self.train()
+    def forward(self, inputs):
+        b, s, h, w, c = inputs.shape
+        inputs = inputs.permute(0, 1, 4, 2, 3).reshape(b, s * c, h, w)
+        x = self.main(inputs / 255.0)
+        return self.critic_linear(x), x
+
 class CNNBase2D(nn.Module):
     def __init__(self, num_inputs, num_outputs, paraslist):
         self.debugflag = True

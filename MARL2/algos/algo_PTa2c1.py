@@ -7,7 +7,18 @@ class Policy(nn.Module):
         super(Policy, self).__init__()
         self.obs_space, self.act_space, self.args = obs_space, act_space, args
         self.device = device
-        if args.aprxfunc=='cnn2d':
+        if args.aprxfunc=='cnnmlp':
+            apfparas = args.apfparas.split('=')
+            cnncnnparas = apfparas[0].split('^')
+            cnnmlpparas = apfparas[1].split('^')
+            if len(obs_space.shape) == 3:   # image: (H, W, C)
+                n_ch = args.stack_num * obs_space.shape[-1]
+                self.base = PTnetwork.CNNBase(num_inputs=n_ch, num_outputs=int(cnnmlpparas[-1]), paraslist=cnncnnparas).to(self.device)
+            elif len(obs_space.shape) == 1: # vector
+                mlpmlpparas = apfparas[2].split('^') if len(apfparas) > 2 else cnnmlpparas
+                self.base = PTnetwork.MLPBase(num_inputs=args.stack_num * obs_space.shape[0], paraslist=mlpmlpparas).to(self.device)
+            else: raise NotImplementedError
+        elif args.aprxfunc=='cnn2d':
             apfparas = args.apfparas.split('=')
             cnncnnparas = apfparas[0].split('^')
             cnnmlpparas = apfparas[1].split('^')
