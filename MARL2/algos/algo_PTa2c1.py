@@ -142,17 +142,17 @@ class Algo(algos.PTAlgo):
             self.mb_rew    = info_in['mb_rew']
             self.mb_mask   = info_in['mb_done']
         else:
-            self.mb_obs    = torch.from_numpy(info_in['mb_obs']).to(self.device).float()
+            self.mb_obs    = torch.from_numpy(info_in['mb_obs']).float().to(self.device)
             self.mb_act    = torch.from_numpy(info_in['mb_act']).to(self.device)
             if self.act_space.__class__.__name__ == 'Discrete': self.mb_act = self.mb_act.long()
-            self.mb_nob    = torch.from_numpy(info_in['mb_new_obs']).to(self.device).float()
-            self.mb_rew    = torch.from_numpy(info_in['mb_rew']).to(self.device).float().unsqueeze(-1)
+            self.mb_nob    = torch.from_numpy(info_in['mb_new_obs']).float().to(self.device)
+            self.mb_rew    = torch.from_numpy(info_in['mb_rew']).float().to(self.device).unsqueeze(-1)
             mb_done_int = info_in['mb_done'].astype(int)
             mb_done_inv = np.ones(mb_done_int.shape)-mb_done_int
-            self.mb_mask   = torch.from_numpy(np.expand_dims(mb_done_inv,-1)).to(self.device).float()
+            self.mb_mask   = torch.from_numpy(np.expand_dims(mb_done_inv,-1)).float().to(self.device)
             #self.mb_mask   = torch.from_numpy(memo_done).float().unsqueeze(-1).to(self.device)
         if self.args.timer: self.Algo_get_update_rew_start = time.process_time()
-        self.returns   = torch.zeros(self.args.memo_size+1, self.args.env_num, 1).to(self.device).float()
+        self.returns   = torch.zeros(self.args.memo_size+1, self.args.env_num, 1).float().to(self.device)
         if 0:
             print('update')
             print('self.mb_obs',self.mb_obs.shape)

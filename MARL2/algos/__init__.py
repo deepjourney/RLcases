@@ -167,12 +167,12 @@ class Memo(PTWrapper):
             self.memo_info      = deque(maxlen=self.args.memo_size)
             self.memo_act_info  = deque(maxlen=self.args.memo_size)
         if self.args.memoplace == "algogpu":
-            self.memg_obs  = torch.zeros(self.args.memo_size, self.args.env_num, self.args.stack_num, *self.obs_space.shape).to(self.device).float()
+            self.memg_obs  = torch.zeros(self.args.memo_size, self.args.env_num, self.args.stack_num, *self.obs_space.shape).float().to(self.device)
             if self.act_space.__class__.__name__ == 'Discrete': self.memg_act  = torch.zeros(self.args.memo_size, self.args.env_num).to(self.device).long()
             else:                                               self.memg_act  = torch.zeros(self.args.memo_size, self.args.env_num, self.act_space.shape[0]).to(self.device)
-            self.memg_nob  = torch.zeros(self.args.memo_size, self.args.env_num, self.args.stack_num, *self.obs_space.shape).to(self.device).float()
-            self.memg_rew  = torch.zeros(self.args.memo_size, self.args.env_num, 1).to(self.device).float()
-            self.memg_mask = torch.zeros(self.args.memo_size, self.args.env_num, 1).to(self.device).float()
+            self.memg_nob  = torch.zeros(self.args.memo_size, self.args.env_num, self.args.stack_num, *self.obs_space.shape).float().to(self.device)
+            self.memg_rew  = torch.zeros(self.args.memo_size, self.args.env_num, 1).float().to(self.device)
+            self.memg_mask = torch.zeros(self.args.memo_size, self.args.env_num, 1).float().to(self.device)
             self.memg_size = 0
             self.memg_info     = deque(maxlen=self.args.memo_size)
             self.memg_act_info = deque(maxlen=self.args.memo_size)
@@ -217,14 +217,14 @@ class Memo(PTWrapper):
             info_in['mb_info']   = self.memg_info
             info_in['mb_act_info']= self.memg_act_info
         if self.args.memoplace == "algocpu":
-            info_in['mb_obs']    = torch.from_numpy(np.array(self.memo_obs)).to(self.device).float()
+            info_in['mb_obs']    = torch.from_numpy(np.array(self.memo_obs)).float().to(self.device)
             info_in['mb_act']    = torch.from_numpy(np.array(self.memo_act)).to(self.device)
             if self.act_space.__class__.__name__ == 'Discrete': info_in['mb_act'] = info_in['mb_act'].long()
-            info_in['mb_new_obs']= torch.from_numpy(np.array(self.memo_nob)).to(self.device).float()
-            info_in['mb_rew']    = torch.from_numpy(np.array(self.memo_rew)).to(self.device).float().unsqueeze(-1)
+            info_in['mb_new_obs']= torch.from_numpy(np.array(self.memo_nob)).float().to(self.device)
+            info_in['mb_rew']    = torch.from_numpy(np.array(self.memo_rew)).float().to(self.device).unsqueeze(-1)
             memo_done_int = np.array(self.memo_done).astype(int)
             memo_done_inv = np.ones(memo_done_int.shape)-memo_done_int
-            info_in['mb_done']   = torch.from_numpy(np.expand_dims(memo_done_inv,-1)).to(self.device).float()
+            info_in['mb_done']   = torch.from_numpy(np.expand_dims(memo_done_inv,-1)).float().to(self.device)
             #self.mb_mask   = torch.from_numpy(memo_done).float().unsqueeze(-1).to(self.device)
             info_in['mb_info']   = self.memo_info
             info_in['mb_act_info']= self.memo_act_info
