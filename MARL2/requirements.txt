@@ -11,5 +11,7 @@ scikit-video
 # 在 macOS 上和 pygame 的 SDL 冲突刷一大堆无害警告。这里改用 headless 版的 opencv，
 # 功能一样（项目只用 cv2 做图像处理，不开窗口），从源头消除冲突。
 stable-baselines3
-ale-py
+# ale-py 钉到 0.10.x：更高的 0.12 在 macOS arm64 上没有预编译 wheel，pip 会从源码现编，
+# 编出的版本不带 Atari ROM（会报 breakout.bin not found）。0.10.2 有现成 wheel 且自带 ROM。
+ale-py>=0.10,<0.11
 opencv-python-headless
