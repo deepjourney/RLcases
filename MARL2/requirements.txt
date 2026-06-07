@@ -7,4 +7,9 @@ joblib
 easydict
 pygame
 scikit-video
-stable-baselines3[extra]
+# stable-baselines3 不带 [extra]：[extra] 会拖进带 GUI/SDL 的 opencv-python，
+# 在 macOS 上和 pygame 的 SDL 冲突刷一大堆无害警告。这里改用 headless 版的 opencv，
+# 功能一样（项目只用 cv2 做图像处理，不开窗口），从源头消除冲突。
+stable-baselines3
+ale-py
+opencv-python-headless
