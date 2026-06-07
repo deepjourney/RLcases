@@ -7,3 +7,4 @@ joblib
 easydict
 gym==0.26.2
 pygame
+scikit-video
