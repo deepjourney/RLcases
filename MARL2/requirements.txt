@@ -1,0 +1,9 @@
+torch
+numpy
+matplotlib
+tqdm
+optuna
+joblib
+easydict
+gym==0.21.0
+pygame

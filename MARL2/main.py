@@ -134,7 +134,7 @@ def trainloop(args):
 def mainloop(args):
     random.seed(args.env_seed)
     np.random.seed(args.env_seed)
-    args.exp_dir = 'results/'+args.env_name+'_'+str(args.env_num)#+'_'+str(args.roll_num)#+'_'+str(args.max_stepsM)
+    args.exp_dir = args.results_dir+'/'+args.env_name+'_'+str(args.env_num)#+'_'+str(args.roll_num)#+'_'+str(args.max_stepsM)
     envirs.add_strings(args)#,^=:
     agents.add_strings(args)
     algos.add_strings(args)
@@ -216,6 +216,7 @@ def main():
     parser.add_argument('--fps', type=int, default=30, help='fps for render (default: 30)')
     parser.add_argument('--width', type=int, default=600, help='width for render (default: 600)')
     parser.add_argument('--height', type=int, default=400, help='height for render (default: 400)')
+    parser.add_argument('--results-dir', default='results', help='base directory for results (default: results)')
     parser.add_argument('--env-seed', type=int, default=1, help='random seed (default: 1)')
     parser.add_argument('--fin-seed', type=int, default=1, help='random seed (default: 1)')
     parser.add_argument('--gameflag', default='', help='atari or sc2 flag')
