@@ -26,6 +26,7 @@ def trainloop(args):
         agent_getaction_time, env_step_time, agent_memoexps_time = 0, 0, 0
         savepoint_time, optuna_stop_time = 0, 0
     last_scores = deque(maxlen=100)
+    last_losses = deque(maxlen=100)
     if args.plotscore:
         last_scores_best = float("-inf")
         last_scores_means = []
@@ -67,8 +68,14 @@ def trainloop(args):
                                 last_scores_means.append(last_scores_mean)
                     if n%args.roll_num==0 and t%(max(1,args.max_train_steps//200))==0:
                         elapsed = (time.time()-starttime)/60
-                        score_str = f'{mean(last_scores):.2f}' if last_scores else 'n/a'
-                        iterator.set_postfix(score=score_str, elapsed_min=f'{elapsed:.1f}')
+                        score_str = f'{mean(last_scores):.1f}' if last_scores else 'n/a'
+                        if last_losses:
+                            vl = mean(x[0] for x in last_losses)
+                            al = mean(x[1] for x in last_losses)
+                            loss_str = f'v{vl:.3f}/a{al:.3f}'
+                        else:
+                            loss_str = 'n/a'
+                        iterator.set_postfix(score=score_str, loss=loss_str, elapsed_min=f'{elapsed:.1f}')
                             #if last_scores_mean >= last_scores_best and t > args.max_train_steps*0.8:
                             #    last_scores_best = last_scores_mean
                             #    agent.save(str(args.env_seed))#+'_'+str(t))
@@ -78,7 +85,8 @@ def trainloop(args):
                     obs = new_obs
                     if args.timer: step_forward_time += get_time()-step_forward_start
                 if args.timer: agent_update_start = get_time()
-                agent.update(t, args.max_train_steps, info_in={})
+                update_result = agent.update(t, args.max_train_steps, info_in={})
+                if update_result is not None: last_losses.append(update_result[:2])  # (value_loss, action_loss)
                 if args.timer: agent_update_time += get_time()-agent_update_start
                 if args.timer: other_in_iterator_start = get_time()
                 if args.timer: savepoint_start = get_time()

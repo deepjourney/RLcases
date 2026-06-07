@@ -23,7 +23,7 @@ class MyAgent(agents.Agent):
         info_in['mb_new_obs'] = np.array(info_in['mb_new_obs'])
         info_in['mb_rew']     = np.array(info_in['mb_rew'])
         info_in['mb_done']    = np.array(info_in['mb_done'])
-        self.algo.update(crt_step=crt_step, max_step=max_step, info_in=info_in)
+        return self.algo.update(crt_step=crt_step, max_step=max_step, info_in=info_in)
     def save(self,name):
         self.algo.save(name)
     def load(self):
