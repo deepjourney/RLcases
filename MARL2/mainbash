@@ -1,0 +1,491 @@
+#!/bin/bash
+# 55556 for 10M and 50M steps # 27778 for 5M and 25M steps # 16666 for 3M and 15M steps RMSprop Acktr Adam
+
+for ((i=$1; i<$1+$2; i++))
+do
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num $3 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-1000,1000" --envir full --max-stepsM 1 \
+  --play-num 4 --type-num 1 --unit-num 20 --envparas 21,400,5000_0.01,-10,0.5 --envonoff 1,1 \
+  --learnflag="0_-1_-1_-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --agtonoff 0 \
+  --algo PTa2c1M --lr-M 1500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,1,1,32,1^3,3,2,2,1,1,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num $3 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-1000,1000" --envir full --max-stepsM 1 \
+  --play-num 4 --type-num 1 --unit-num 20 --envparas 21,400,5000_0.01,-10,0.5 --envonoff 1,1 \
+  --learnflag="0_-1_-1_-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --agtonoff 0 \
+  --algo PTa2c1M --lr-M 1500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,1,1,32,1^3,3,2,2,1,1,256,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num $3 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-1000,1000" --envir full --max-stepsM 1 \
+  --play-num 4 --type-num 1 --unit-num 20 --envparas 21,400,5000_0.01,-10,0.5 --envonoff 1,1 \
+  --learnflag="0_-1_-1_-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --agtonoff 0 \
+  --algo PTa2c1M --lr-M 1500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,1,1,32,1^3,3,2,2,1,1,128,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+
+
+
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num $3 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-1000,1000" --envir full --max-stepsM 1 \
+  --play-num 4 --type-num 1 --unit-num 20 --envparas 21,400,5000_0.01,-10,0.5 --envonoff 1,1 \
+  --learnflag="0_-1_-1_-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --agtonoff 0 \
+  --algo PTa2c1M --lr-M 1500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,1,1,32,1^3,3,2,2,1,1,256,1^3,3,2,2,1,1,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num $3 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-1000,1000" --envir full --max-stepsM 1 \
+  --play-num 4 --type-num 1 --unit-num 20 --envparas 21,400,5000_0.01,-10,0.5 --envonoff 1,1 \
+  --learnflag="0_-1_-1_-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --agtonoff 0 \
+  --algo PTa2c1M --lr-M 1500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,1,1,32,1^3,3,2,2,1,1,128,1^3,3,2,2,1,1,256,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+done
+exit 1
+################################################################################################################################################
+
+for ((i=$1; i<$1+$2; i++))
+do
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num $3 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-1000,1000" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 20 --envparas 21,400,5000_0.01,-10,0.5 --envonoff 1,1 \
+  --learnflag="0_1_1_1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --agtonoff 0 \
+  --algo PTa2c1M --lr-M 1500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,1,1,32,1^3,3,2,2,1,1,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num $3 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-1000,1000" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 20 --envparas 21,400,5000_0.01,-10,0.5 --envonoff 1,1 \
+  --learnflag="1_0_1_1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --agtonoff 0 \
+  --algo PTa2c1M --lr-M 1500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,1,1,32,1^3,3,2,2,1,1,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num $3 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-1000,1000" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 20 --envparas 21,400,5000_0.01,-10,0.5 --envonoff 1,1 \
+  --learnflag="1_1_0_1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --agtonoff 0 \
+  --algo PTa2c1M --lr-M 1500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,1,1,32,1^3,3,2,2,1,1,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num $3 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-1000,1000" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 20 --envparas 21,400,5000_0.01,-10,0.5 --envonoff 1,1 \
+  --learnflag="1_1_1_0" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --agtonoff 0 \
+  --algo PTa2c1M --lr-M 1500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,1,1,32,1^3,3,2,2,1,1,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+done
+exit 1
+################################################################################################################################################
+for ((i=$1; i<$1+$2; i++))
+do
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num $3 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-1000,1000" --envir full --max-stepsM 1 \
+  --play-num 4 --type-num 1 --unit-num 20 --envparas 21,400,5000_0.01,-10,0.5 --envonoff 1,1 \
+  --learnflag="0_-1_-1_-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --agtonoff 0 \
+  --algo PTa2c1M --lr-M 1500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,1,1,32,1^3,3,2,2,1,1,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+done
+exit 1
+#res2d --apfparas 3,1,0,128,1^2,1,0,0,1^64,1,1,1,1=256 \
+#cnn2d --apfparas 3,3,1,1,1,1,32,1^3,3,2,2,1,1,512,1=256 \
+
+for ((i=$1; i<$1+$2; i++))
+do
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-1000,1000" --envir full --max-stepsM 3 \
+  --play-num 4 --type-num 1 --unit-num 20 --envparas 21,400,5000_0.01,-10,0.5 --envonoff 1,1 \
+  --learnflag="0_-1_-1_-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --agtonoff 0 \
+  --algo PTa2c1M --lr-M 1500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,1,1,100,1^3,3,2,2,1,1,256,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+done
+exit 1
+################################################################################################################################################
+for ((i=$1; i<$1+$2; i++))
+do
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-500,500" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,2000_0.01,-10,0.5 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --envonoff 0,1 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --agtonoff 0 \
+  --algo PTa2c1M --lr-M 2000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,1,1,100,1^3,3,2,2,1,1,256,1=128 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+done
+exit 1
+#start to try oppo
+################################################################################################################################################
+for ((i=$1; i<$1+$2; i++))
+do
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-1000,1000" --envir full --max-stepsM 5 \
+  --play-num 4 --type-num 1 --unit-num 20 --envparas 21,400,5000_0.01,-10,0.5 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --envonoff 1,1 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --agtonoff 0 \
+  --algo PTa2c1M --lr-M 1500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,1,1,100,1^3,3,2,2,1,1,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+done
+exit 1
+################################################################################################################################################
+for ((i=$1; i<$1+$2; i++))
+do
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-500,500" --envir full --max-stepsM 5 \
+  --play-num 4 --type-num 1 --unit-num 20 --envparas 21,400,5000_0.01,-10,0.5 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --envonoff 0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --agtonoff 0 \
+  --algo PTa2c1M --lr-M 3000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,1,1,100,1^3,3,2,2,1,1,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+done
+exit 1
+################################################################################################################################################
+for ((i=$1; i<$1+$2; i++))
+do
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-500,500" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 10 --envparas 11,300,1000_0.01,-10,0.5 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --agtonoff 0 \
+  --algo PTa2c1M --lr-M 3000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-500,500" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 15 --envparas 11,300,1000_0.01,-10,0.5 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --agtonoff 0 \
+  --algo PTa2c1M --lr-M 3000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-500,500" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 20 --envparas 11,300,1000_0.01,-10,0.5 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --agtonoff 0 \
+  --algo PTa2c1M --lr-M 3000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-500,500" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 25 --envparas 11,300,1000_0.01,-10,0.5 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --agtonoff 0 \
+  --algo PTa2c1M --lr-M 3000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+done
+exit 1
+################################################################################################################################################
+for ((i=$1; i<$1+$2; i++))
+do
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,450" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,1000_0.01,-10,0.8 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 1000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,450" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,1000_0.01,-10,0.8 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 3000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,450" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,1000_0.01,-10,0.8 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 5000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,450" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,1000_0.01,-10,0.6 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 1000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,450" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,1000_0.01,-10,0.6 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 3000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,450" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,1000_0.01,-10,0.6 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 5000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,450" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,1000_0.01,-10,0.4 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 1000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,450" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,1000_0.01,-10,0.4 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 3000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,450" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,1000_0.01,-10,0.4 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 5000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+
+
+
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,450" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,1000_0.01,-5,0.8 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 1000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,450" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,1000_0.01,-5,0.8 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 3000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,450" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,1000_0.01,-5,0.8 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 5000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,450" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,1000_0.01,-5,0.6 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 1000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,450" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,1000_0.01,-5,0.6 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 3000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,450" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,1000_0.01,-5,0.6 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 5000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,450" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,1000_0.01,-5,0.4 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 1000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,450" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,1000_0.01,-5,0.4 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 3000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,450" --envir full --max-stepsM 2 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,1000_0.01,-5,0.4 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 5000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+done
+exit 1
+################################################################################################################################################
+for ((i=$1; i<$1+$2; i++))
+do
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,450" --envir full --max-stepsM 5 \
+  --play-num 4 --type-num 1 --unit-num 5 --envparas 11,200,1000_0.01 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 2000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 3,3,1,1,2,2,256,1^3,3,2,2,2,2,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+done
+exit 1
+# do not know effect, but 5 units 21x21 use 6h, and 11x11 use 2h30m, and 3 units 7x7 use 1h30m, 5M steps
+################################################################################################################################################
+for ((i=$1; i<$1+$2; i++))
+do
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-5,95" --envir full --max-stepsM 4 \
+  --play-num 4 --type-num 1 --unit-num 3 --envparas 11,300,1000_0.01 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 800 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 5,5,2,2,64,1^3,3,1,1,128,1^2,2,1,1,256,1^1,1=512 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-5,95" --envir full --max-stepsM 4 \
+  --play-num 4 --type-num 1 --unit-num 3 --envparas 11,300,1000_0.01 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 1000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 5,5,2,2,64,1^3,3,1,1,128,1^2,2,1,1,256,1^1,1=512 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-5,95" --envir full --max-stepsM 4 \
+  --play-num 4 --type-num 1 --unit-num 3 --envparas 11,300,1000_0.01 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 1200 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 5,5,2,2,64,1^3,3,1,1,128,1^2,2,1,1,256,1^1,1=512 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-0.50,9.50" --envir full --max-stepsM 4 \
+  --play-num 4 --type-num 1 --unit-num 3 --envparas 11,300,1000_0.001 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 800 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 5,5,2,2,64,1^3,3,1,1,128,1^2,2,1,1,256,1^1,1=512 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-0.50,9.50" --envir full --max-stepsM 4 \
+  --play-num 4 --type-num 1 --unit-num 3 --envparas 11,300,1000_0.001 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 1000 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 5,5,2,2,64,1^3,3,1,1,128,1^2,2,1,1,256,1^1,1=512 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-0.50,9.50" --envir full --max-stepsM 4 \
+  --play-num 4 --type-num 1 --unit-num 3 --envparas 11,300,1000_0.001 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,-1_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 1200 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 5,5,2,2,64,1^3,3,1,1,128,1^2,2,1,1,256,1^1,1=512 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+done
+exit 1
+#######################################################################################################################################################################################
+for ((i=$1; i<$1+$2; i++))
+do
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,950" --envir full --max-stepsM 10 \
+  --play-num 4 --type-num 1 --unit-num 20 --envparas 21,300,1000_ --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --timer \
+  --algo PTa2c1M --lr-M 2500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 5,5,2,2,32,1^3,3,2,2,64,1^3,3,1,1,64,1^2,2=512 \
+  #--algo PTa2c1M --lr-M 2500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc res2d --apfparas 3,1,0,128,1^2,1,0,0,1^64,1,1,1,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+done
+exit 1
+# 6h20m have not check the effect yet
+#######################################################################################################################################################################################
+for ((i=$1; i<$1+$2; i++))
+do
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --gameflag 'atari' --env-name "BreakoutNoFrameskip-v4" --minmax-score="0,500" --envir full --max-stepsM 10 \
+  --play-num 4 --type-num 2 --unit-num 5 --envparas 10,1000_ --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,0_-1,-1_-1,-1_-1,-1" --stack-num 4 --agent imagine --memoplace agtcpu --savenum 5 --timer \
+  --algo PTa2c1 --lr-M 700 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 8,8,4,4,32,1^4,4,2,2,64,1^3,3,1,1,64,1^7,7=512 \
+  #--algo PTa2c1 --lr-M 700 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc res2d --apfparas 8,4,0,32,1^3,2,0,0,1^32,1,1,1,1=512 \
+  #--algo PTa2c1 --lr-M 700 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn2d --apfparas 8,8,4,4,32,1^4,4,2,2,64,1^3,3,1,1,64,1^7,7=512 \
+  #--algo PTa2c1 --lr-M 700 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 8,8,3,4,4,1,0,0,0,32,1^4,4,2,2,2,1,0,0,0,64,1^3,3,1,1,1,1,0,0,0,64,1=512 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+done
+exit 1
+# 10M step cnn3d 64 1h27m cnn2d 64 1h3.5m res2d 1h30m
+#######################################################################################################################################################################################
+for ((i=$1; i<$1+$2; i++))
+do
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,950" --envir full --max-stepsM 5 \
+  --agt-num 4 --type-num 2 --unit-num 5 --b-size 21 --envparas 1,300,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 --timer \
+  --algo PTa2c1M --lr-M 2500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc res2d --apfparas 3,1,0,128,1^2,1,0,0,1^64,1,1,1,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+done
+exit 1
+# effective
+#######################################################################################################################################################################################
+for ((i=$1; i<$1+$2; i++))
+do
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,950" --envir full --max-stepsM 2 \
+  --agt-num 4 --type-num 2 --unit-num 5 --b-size 21 --envparas 1,300,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 2 \
+  --algo PTa2c1M --lr-M 2500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 3,3,1,1,1,1,0,0,0,256,1^3,3,1,2,2,1,0,0,0,512,1=256 \
+  #--to-test --testlength 0.15 --render --fps 12 #--zoom-in 32 #--debug
+done
+exit 1
+#######################################################################################################################################################################################
+for ((i=$1; i<$1+$2; i++))
+do
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,50" --envir full --max-stepsM 2 \
+  --agt-num 4 --type-num 2 --unit-num 2 --b-size 11 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 5 \
+  --algo PTa2c1M --lr-M 2500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 3,3,1,1,1,1,0,0,0,128,1^3,3,1,2,2,1,0,0,0,256,1=256 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,50" --envir full --max-stepsM 2 \
+  --agt-num 4 --type-num 2 --unit-num 2 --b-size 11 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 5 \
+  --algo PTa2c1M --lr-M 2500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 3,3,1,1,1,1,0,0,0,128,1^3,3,1,1,1,1,0,0,0,256,1=256 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,50" --envir full --max-stepsM 2 \
+  --agt-num 4 --type-num 2 --unit-num 2 --b-size 11 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 5 \
+  --algo PTa2c1M --lr-M 2500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 3,3,1,1,1,1,0,0,0,64,1^3,3,1,2,2,1,0,0,0,128,1=128 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,50" --envir full --max-stepsM 2 \
+  --agt-num 4 --type-num 2 --unit-num 2 --b-size 11 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 5 \
+  --algo PTa2c1M --lr-M 2500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 3,3,1,1,1,1,0,0,0,64,1^3,3,1,1,1,1,0,0,0,128,1=128 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,50" --envir full --max-stepsM 2 \
+  --agt-num 4 --type-num 2 --unit-num 2 --b-size 11 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 5 \
+  --algo PTa2c1M --lr-M 2500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 3,3,1,1,1,1,0,0,0,256,1^3,3,1,2,2,1,0,0,0,512,1=512 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,50" --envir full --max-stepsM 2 \
+  --agt-num 4 --type-num 2 --unit-num 2 --b-size 11 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 5 \
+  --algo PTa2c1M --lr-M 2500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 3,3,1,1,1,1,0,0,0,256,1^3,3,1,1,1,1,0,0,0,512,1=512 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,50" --envir full --max-stepsM 2 \
+  --agt-num 4 --type-num 2 --unit-num 2 --b-size 11 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 5 \
+  --algo PTa2c1M --lr-M 1500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 3,3,1,1,1,1,0,0,0,128,1^3,3,1,2,2,1,0,0,0,256,1=256 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,50" --envir full --max-stepsM 2 \
+  --agt-num 4 --type-num 2 --unit-num 2 --b-size 11 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 5 \
+  --algo PTa2c1M --lr-M 1500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 3,3,1,1,1,1,0,0,0,128,1^3,3,1,1,1,1,0,0,0,256,1=256 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,50" --envir full --max-stepsM 2 \
+  --agt-num 4 --type-num 2 --unit-num 2 --b-size 11 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 5 \
+  --algo PTa2c1M --lr-M 1500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 3,3,1,1,1,1,0,0,0,64,1^3,3,1,2,2,1,0,0,0,128,1=128 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,50" --envir full --max-stepsM 2 \
+  --agt-num 4 --type-num 2 --unit-num 2 --b-size 11 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 5 \
+  --algo PTa2c1M --lr-M 1500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 3,3,1,1,1,1,0,0,0,64,1^3,3,1,1,1,1,0,0,0,128,1=128 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,50" --envir full --max-stepsM 2 \
+  --agt-num 4 --type-num 2 --unit-num 2 --b-size 11 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 5 \
+  --algo PTa2c1M --lr-M 1500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 3,3,1,1,1,1,0,0,0,256,1^3,3,1,2,2,1,0,0,0,512,1=512 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,50" --envir full --max-stepsM 2 \
+  --agt-num 4 --type-num 2 --unit-num 2 --b-size 11 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 5 \
+  --algo PTa2c1M --lr-M 1500 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 3,3,1,1,1,1,0,0,0,256,1^3,3,1,1,1,1,0,0,0,512,1=512 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,50" --envir full --max-stepsM 2 \
+  --agt-num 4 --type-num 2 --unit-num 2 --b-size 11 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 5 \
+  --algo PTa2c1M --lr-M 700 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 3,3,1,1,1,1,0,0,0,128,1^3,3,1,2,2,1,0,0,0,256,1=256 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,50" --envir full --max-stepsM 2 \
+  --agt-num 4 --type-num 2 --unit-num 2 --b-size 11 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 5 \
+  --algo PTa2c1M --lr-M 700 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 3,3,1,1,1,1,0,0,0,128,1^3,3,1,1,1,1,0,0,0,256,1=256 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,50" --envir full --max-stepsM 2 \
+  --agt-num 4 --type-num 2 --unit-num 2 --b-size 11 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 5 \
+  --algo PTa2c1M --lr-M 700 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 3,3,1,1,1,1,0,0,0,64,1^3,3,1,2,2,1,0,0,0,128,1=128 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,50" --envir full --max-stepsM 2 \
+  --agt-num 4 --type-num 2 --unit-num 2 --b-size 11 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 5 \
+  --algo PTa2c1M --lr-M 700 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 3,3,1,1,1,1,0,0,0,64,1^3,3,1,1,1,1,0,0,0,128,1=128 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,50" --envir full --max-stepsM 2 \
+  --agt-num 4 --type-num 2 --unit-num 2 --b-size 11 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 5 \
+  --algo PTa2c1M --lr-M 700 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 3,3,1,1,1,1,0,0,0,256,1^3,3,1,2,2,1,0,0,0,512,1=512 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --env-name "haliteM-v0" --minmax-score="-50,50" --envir full --max-stepsM 2 \
+  --agt-num 4 --type-num 2 --unit-num 2 --b-size 11 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="-1,0_-1,-1_-1,-1_-1,-1" --stack-num 1 --agent haliteM --memoplace agtcpu --savenum 5 \
+  --algo PTa2c1M --lr-M 700 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 3,3,1,1,1,1,0,0,0,256,1^3,3,1,1,1,1,0,0,0,512,1=512 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+done
+exit 1
+#######################################################################################################################################################################################
+# new arrayobs avoid deep copy 11x11 4h10min 1agt3rule 4h30min 0agt4rule 21x21 12h
+#######################################################################################################################################################################################
+# 3,3,1,1,1,1,0,0,0,32,1^3,3,1,2,2,1,0,0,0,64,1=256 \
+# no step no act no update   42min
+#    step no act no update 2h40min
+# no step  4 act no update 1h28min
+# no step  1 act no update   55min
+# no step no act    update 1h15min
+#    step  1 act    update 3h25min
+
+# no obs no act no rew 3h25min
+#    obs    act    rew 9h25min
+#    obs no act no rew 9h00min
+# no obs    act no rew 4h00min
+# no obs no act    rew 3h30min
+# 3,3,1,1,1,1,0,0,0,128,1^3,3,1,2,2,1,0,0,0,256,1=256 \
+#    obs    act    rew 10h
+#######################################################################################################################################################################################
+for ((i=$1; i<$1+$2; i++))
+do
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --gameflag 'atari' --env-name "BreakoutNoFrameskip-v4" --minmax-score="0,500" --envir full --max-stepsM 10 \
+  --agt-num 4 --type-num 2 --unit-num 3 --b-size 9 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,0_-1,-1_-1,-1_-1,-1" --stack-num 4 --agent imagine --memoplace agtcpu --savenum 5 \
+  --algo PTa2c1 --lr-M 700 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 8,8,3,4,4,1,0,0,0,32,1^4,4,2,2,2,1,0,0,0,64,1^3,3,1,1,1,1,0,0,0,64,1=512 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+done
+exit 1
+# cnn3d --apfparas 8,8,3,4,4,1,0,0,0,32,1^4,4,2,2,2,1,0,0,0,64,1^3,3,1,1,1,1,0,0,0,64,1=512 \
+# 64 1h30min
+for ((i=$1; i<$1+$2; i++))
+do
+  python main.py --env-seed $i --fin-seed $(($1+$2-1)) --env-num 64 --roll-num 5 --memo-size 5 --gameflag 'atari' --env-name "BreakoutNoFrameskip-v4" --minmax-score="0,500" --envir full --max-stepsM 10 \
+  --agt-num 4 --type-num 2 --unit-num 3 --b-size 9 --envparas 10,1000_-0.34,0.91,-0.77,-0.12,-1.19,43.3 --agtparas 3,3,5,8,1,3,1 --npcparas 4,4,5,32,1,1,1 --switches 0,0,0 \
+  --learnflag="0,0_-1,-1_-1,-1_-1,-1" --stack-num 4 --agent imagineM --memoplace agtcpu --savenum 5 --timer \
+  --algo PTa2c1M --lr-M 700 --decay linear --decayparas 0.01,, --opt RMSprop --aprxfunc cnn3d --apfparas 8,8,3,4,4,1,0,0,0,32,1^4,4,2,2,2,1,0,0,0,64,1^3,3,1,1,1,1,0,0,0,64,1=512 \
+  #--to-test --testlength 0.015 --render --fps 12 #--zoom-in 32 #--debug
+done
+exit 1
+# 15h
+# no act no update 2h
+# no act no update no stack obs for multiplayer multitype 1h
+# no act no update no stack obs for multiplayer multitype 0.21M 0.59min
+#  4 act no update    stack obs for multiplayer multitype 0.21M 4.47min
+#  1 act no update    stack obs for multiplayer multitype 0.21M 1.09min
+#  1 act  1 update    stack obs for multiplayer multitype 0.21M 3.71min
+#  1 act  1 update    stack obs for multiplayer multitype   10M 3h30min
+#layer s : [84, 84, 4, 1]
+#layer 0 : [20, 20, 2] 32
+#layer 1 : [9, 9, 1] 64
+#layer 2 : [7, 7, 1] 64
+#layer l : 512
+#1717413 6144 32 65536 64 36864 64 1605632 512 512 1 2048 4

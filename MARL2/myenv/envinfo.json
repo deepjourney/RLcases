@@ -1,0 +1,1 @@
+{"timer": false, "env_seed": 1, "env_name": "haliteM-v0", "play_num": 4, "type_num": 1, "unit_num": 20, "envparas": "21,400,5000_0.01,-10,0.5", "npcparas": "", "agtparas": "", "envonoff": "1,1", "learnflag": "0_-1_-1_-1", "render": false, "zoom_in": 1}
