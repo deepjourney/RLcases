@@ -6,5 +6,7 @@ optuna
 joblib
 easydict
 gym==0.26.2
+ale-py==0.8.1
+AutoROM[accept-rom-license]
 pygame
 scikit-video
