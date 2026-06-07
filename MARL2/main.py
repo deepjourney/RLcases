@@ -30,6 +30,25 @@ def trainloop(args):
     if args.plotscore:
         last_scores_best = float("-inf")
         last_scores_means = []
+        loss_means_v, loss_means_a, curve_steps = [], [], []
+        live_curve_path = args.exp_dir+str(args.env_seed)+'_live_curve.png'
+        live_csv_path   = args.exp_dir+str(args.env_seed)+'_live_curve.csv'
+        def _save_live_curve():
+            try:
+                fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8), sharex=True)
+                ax1.plot(curve_steps, last_scores_means, color='tab:blue')
+                ax1.set_ylabel('mean score (last 100 eps)'); ax1.grid(True, alpha=0.3)
+                ax1.set_title(f'{args.env_name}  seed {args.env_seed}  step {curve_steps[-1] if curve_steps else 0}/{args.max_train_steps}')
+                ax2.plot(curve_steps, loss_means_v, color='tab:red',   label='value loss')
+                ax2.plot(curve_steps, loss_means_a, color='tab:orange',label='action loss')
+                ax2.set_xlabel('update step'); ax2.set_ylabel('loss'); ax2.legend(); ax2.grid(True, alpha=0.3)
+                fig.tight_layout(); fig.savefig(live_curve_path, dpi=120); plt.close(fig)
+                with open(live_csv_path, 'w') as fcsv:
+                    print('step,score,value_loss,action_loss', file=fcsv)
+                    for s, sc, lv, la in zip(curve_steps, last_scores_means, loss_means_v, loss_means_a):
+                        print(f'{s},{sc},{lv},{la}', file=fcsv)
+            except Exception as e:
+                print('live curve save failed:', e)
     print(args.env_seed,':',args.fin_seed)
     if args.to_test:
         agent.load()
@@ -62,10 +81,14 @@ def trainloop(args):
                         if score_key in infoi:
                             last_scores.append(infoi[score_key])
                     if args.plotscore:
-                        if n%args.roll_num==0 and t%(args.max_train_steps//100)==0:
+                        if n%args.roll_num==0 and t%(max(1,args.max_train_steps//100))==0:
                             if len(last_scores)!=0:
                                 last_scores_mean = mean(last_scores)
                                 last_scores_means.append(last_scores_mean)
+                                curve_steps.append(t)
+                                loss_means_v.append(mean(x[0] for x in last_losses) if last_losses else 0.0)
+                                loss_means_a.append(mean(x[1] for x in last_losses) if last_losses else 0.0)
+                                _save_live_curve()
                     if n%args.roll_num==0 and t%(max(1,args.max_train_steps//200))==0:
                         elapsed = (time.time()-starttime)/60
                         score_str = f'{mean(last_scores):.1f}' if last_scores else 'n/a'
