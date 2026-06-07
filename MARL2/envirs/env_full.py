@@ -1,5 +1,4 @@
 import numpy as np
-import ale_py
 import gym, easydict, cv2, random, scipy, json
 from envirs.warppers import Recorder, Monitor, wrap_deepmind_render
 from baselines.common.atari_wrappers import make_atari, wrap_deepmind
