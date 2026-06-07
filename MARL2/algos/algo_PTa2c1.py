@@ -121,7 +121,7 @@ class Algo(algos.PTAlgo):
             if self.args.timer: self.Algo_get_action_crt_start = time.process_time()
             action, info_p = self.model.get_action(inputs, explore)
             if self.args.timer: self.Algo_get_action_syn_start = time.process_time()
-            torch.cuda.synchronize()
+            if torch.cuda.is_available(): torch.cuda.synchronize()
             if self.args.timer: self.Algo_get_action_syn += time.process_time()-self.Algo_get_action_syn_start
             if self.args.timer: self.Algo_get_action_crt += time.process_time()-self.Algo_get_action_crt_start
             if self.args.timer: self.Algo_get_action_pst_start = time.process_time()
@@ -203,7 +203,7 @@ class Algo(algos.PTAlgo):
         self.optimizer.zero_grad()
         (value_loss*self.args.vlossratio + action_loss - dist_entropy*self.args.entropycoef).backward()
         if self.args.timer: self.Algo_get_action_syn_start = time.process_time()
-        torch.cuda.synchronize()
+        if torch.cuda.is_available(): torch.cuda.synchronize()
         if self.args.timer: self.Algo_get_action_syn += time.process_time()-self.Algo_get_action_syn_start
         if self.args.opt!='Acktr': nn.utils.clip_grad_norm_(self.model.parameters(),self.args.max_grad_norm)
         self.optimizer.step()
