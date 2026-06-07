@@ -55,8 +55,9 @@ class Memo(agents.Wrapper):
                     'mb_act_info':  self.agt.attr.memo_act_info, **info_in}
         if self.attr.args.timer: self.Memo_update_pre += self.process_time()-self.Memo_update_pre_start
         if self.attr.args.timer: self.Memo_update_crt_start = self.process_time()
-        self.agt.update(crt_step=crt_step, max_step=max_step, info_in=info_in)
+        update_result = self.agt.update(crt_step=crt_step, max_step=max_step, info_in=info_in)
         if self.attr.args.timer: self.Memo_update_crt += self.process_time()-self.Memo_update_crt_start
+        return update_result
 
 class Stack(agents.Wrapper):
     def __init__(self,agt):
@@ -135,7 +136,7 @@ class Imagine(agents.Wrapper):
         if self.imagine_reward != 0:
             mb_intrew = self.intrinsic_reward(np.array(self.agt.attr.memo_obs), np.array(self.agt.attr.memo_act), np.array(self.agt.attr.memo_new_obs))######
             info_in =  {'mb_intrew': mb_intrew, **info_in}
-        self.agt.update(crt_step=crt_step, max_step=max_step, info_in=info_in)
+        return self.agt.update(crt_step=crt_step, max_step=max_step, info_in=info_in)
 
 """
 class Space(object):
