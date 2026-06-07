@@ -1,5 +1,16 @@
 import numpy as np
-import gym, easydict, cv2, random, scipy, json
+import gymnasium as gym, ale_py; gym.register_envs(ale_py)
+import easydict, cv2, random, scipy, json
+
+class _GymCompat(gym.Wrapper):
+    def reset(self, **kwargs):
+        obs, _ = self.env.reset(**kwargs)
+        return obs
+    def step(self, action):
+        obs, rew, terminated, truncated, info = self.env.step(action)
+        return obs, rew, terminated or truncated, info
+    def seed(self, seed=None):
+        pass
 from envirs.warppers import Recorder, Monitor, wrap_deepmind_render
 from baselines.common.atari_wrappers import make_atari, wrap_deepmind
 #from pysc2.env import sc2_env
@@ -10,7 +21,7 @@ def env_maker(env_name, i, env_seed, args):
         #elif args.gameflag=='sc2':
         #    env = sc2_env.SC2Env(env_name)#,tep_mul=step_mul,visualize=True)
         else:
-            env = gym.make(env_name)
+            env = _GymCompat(gym.make(env_name))
         if hasattr(env,'attr'): env.spec._kwargs['attr']=env.attr
         env.seed(i+env_seed)
         random.seed(i+env_seed)
