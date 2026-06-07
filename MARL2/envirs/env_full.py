@@ -1,43 +1,47 @@
 import numpy as np
 import gymnasium as gym
+import ale_py
 import easydict, random, json
 
-from stable_baselines3.common.vec_env import SubprocVecEnv, DummyVecEnv
-from stable_baselines3.common.atari_wrappers import AtariWrapper
-from envirs.warppers import Recorder, Monitor, wrap_deepmind_render
+gym.register_envs(ale_py)
 
-class _GymCompat(gym.Wrapper):
-    """Adapts gymnasium 5-tuple API to the legacy 4-tuple used internally."""
-    def reset(self, **kwargs):
-        obs, _ = self.env.reset(**kwargs)
-        return obs
-    def step(self, action):
-        obs, rew, terminated, truncated, info = self.env.step(action)
-        return obs, rew, terminated or truncated, info
-    def seed(self, seed=None):
-        pass
+from stable_baselines3.common.vec_env import SubprocVecEnv, DummyVecEnv
+from stable_baselines3.common.atari_wrappers import (
+    NoopResetEnv, MaxAndSkipEnv, EpisodicLifeEnv, FireResetEnv, WarpFrame, ClipRewardEnv,
+)
+from envirs.warppers import Recorder, Monitor, wrap_deepmind_render
 
 def env_maker(env_name, i, env_seed, args):
     def __make_env():
+        render_mode = 'rgb_array' if args.render else None
         if args.gameflag == 'atari':
-            env = gym.make(env_name)
-            env = _GymCompat(env)
-            env.seed(i + env_seed)
-            random.seed(i + env_seed)
-            np.random.seed(i + env_seed)
+            env = gym.make(env_name, render_mode=render_mode)
+            env = NoopResetEnv(env, noop_max=30)
+            env = MaxAndSkipEnv(env, skip=4)
+            # Recorder sits after frame-skip but before reward-clip / episodic-life,
+            # so it logs the TRUE per-episode game score with correct step counting.
             env = Recorder(env, i, args)
             if args.render:
                 env = Monitor(env, i, args, 'org_')
-            env = AtariWrapper(env)
-            env = wrap_deepmind_render(env)
+            env = EpisodicLifeEnv(env)
+            if 'FIRE' in env.unwrapped.get_action_meanings():
+                env = FireResetEnv(env)
+            env = WarpFrame(env)
+            env = ClipRewardEnv(env)
+            if args.render:
+                env = wrap_deepmind_render(env)
+                env = Monitor(env, i, args)
         else:
-            env = _GymCompat(gym.make(env_name))
-            env.seed(i + env_seed)
-            random.seed(i + env_seed)
-            np.random.seed(i + env_seed)
+            env = gym.make(env_name, render_mode=render_mode)
             env = Recorder(env, i, args)
-        if args.render:
-            env = Monitor(env, i, args)
+            if args.render:
+                env = Monitor(env, i, args)
+        try:
+            env.action_space.seed(i + env_seed)
+        except Exception:
+            pass
+        random.seed(i + env_seed)
+        np.random.seed(i + env_seed)
         return env
     return __make_env
 

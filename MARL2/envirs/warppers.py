@@ -3,6 +3,21 @@ import gymnasium as gym
 import cv2, time
 import skvideo.io
 
+def _split_step(result):
+    """Accept both gymnasium 5-tuple and legacy 4-tuple step returns."""
+    if len(result) == 5:
+        obs, rew, terminated, truncated, info = result
+    else:
+        obs, rew, done, info = result
+        terminated, truncated = done, False
+    return obs, rew, terminated, truncated, info
+
+def _split_reset(result):
+    """Accept both gymnasium (obs, info) and legacy obs-only reset returns."""
+    if isinstance(result, tuple) and len(result) == 2:
+        return result[0], result[1]
+    return result, {}
+
 class Recorder(gym.Wrapper):
     def __init__(self, env, i, args):
         gym.Wrapper.__init__(self, env=env)
@@ -20,21 +35,13 @@ class Recorder(gym.Wrapper):
     def process_time(self):
         return np.array([time.process_time(),time.perf_counter()])
     def reset(self, **kwargs):
-        obs = self.env.reset(**kwargs)
-        # env.reset() may return (obs, info) from gymnasium or obs from legacy wrapper
-        if isinstance(obs, tuple):
-            obs = obs[0]
+        obs, info = _split_reset(self.env.reset(**kwargs))
         self.reward, self.length, self.last_epreward, self.last_eplength, self.rewlist, self.actlist = 0, 0, -1, -1, [], []
-        return obs
+        return obs, info
     def step(self, act):
         if self.timer: self.step_start = self.process_time()
-        result = self.env.step(act)
-        # support both 4-tuple (legacy) and 5-tuple (gymnasium)
-        if len(result) == 5:
-            obs, rew, terminated, truncated, info = result
-            done = terminated or truncated
-        else:
-            obs, rew, done, info = result
+        obs, rew, terminated, truncated, info = _split_step(self.env.step(act))
+        done = terminated or truncated
         self.g_step += self.g_step_plus
         self.reward += np.sum(np.asarray(rew))
         self.length += 1
@@ -44,7 +51,7 @@ class Recorder(gym.Wrapper):
             if 'exinfos' in info: print(int(self.g_step),',',info['exinfos'], end='|',file=self.fexinfos,flush=True)
             info = {'last_score':int(self.reward),'last_length':int(self.length),**info}
         if self.timer: self.step_crt += self.process_time()-self.step_start
-        return obs, rew, done, info
+        return obs, rew, terminated, truncated, info
 
 class Monitor(gym.Wrapper):
     def __init__(self, env, i, args, prefix=''):
@@ -64,29 +71,23 @@ class Monitor(gym.Wrapper):
     def __del__(self):
         if self.gameflag == 'atari': pass
         else:                        self.vWriter.release()
-    def render(self, mode='rgb_array'):
+    def render(self, *args, **kwargs):
         frame = self.env.render()
         if self.gameflag == 'atari': self.encoder.capture_frame(frame)
         else:                        self.vWriter.write(frame)
         return frame
     def reset(self, **kwargs):
-        obs = self.env.reset(**kwargs)
-        if isinstance(obs, tuple): obs = obs[0]
-        return obs
+        obs, info = _split_reset(self.env.reset(**kwargs))
+        return obs, info
     def step(self, act):
-        result = self.env.step(act)
-        if len(result) == 5:
-            obs, rew, terminated, truncated, info = result
-            done = terminated or truncated
-        else:
-            obs, rew, done, info = result
+        obs, rew, terminated, truncated, info = _split_step(self.env.step(act))
         if self.debug: print(obs)
-        return obs, rew, done, info
+        return obs, rew, terminated, truncated, info
 
 class wrap_deepmind_render(gym.Wrapper):
     def __init__(self, env):
         gym.Wrapper.__init__(self, env=env)
-    def render(self, mode='rgb_array'):
+    def render(self, *args, **kwargs):
         frame = self.env.render()
         frame = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
         frame = cv2.resize(frame, (84, 84), interpolation=cv2.INTER_AREA)
@@ -94,17 +95,10 @@ class wrap_deepmind_render(gym.Wrapper):
         frame = np.tile(frame, 3)
         return frame
     def reset(self, **kwargs):
-        obs = self.env.reset(**kwargs)
-        if isinstance(obs, tuple): obs = obs[0]
-        return obs
+        obs, info = _split_reset(self.env.reset(**kwargs))
+        return obs, info
     def step(self, act):
-        result = self.env.step(act)
-        if len(result) == 5:
-            obs, rew, terminated, truncated, info = result
-            done = terminated or truncated
-        else:
-            obs, rew, done, info = result
-        return obs, rew, done, info
+        return _split_step(self.env.step(act))
 
 ###########################################################################
 from stable_baselines3.common.vec_env import VecNormalize as VecNormalize_
