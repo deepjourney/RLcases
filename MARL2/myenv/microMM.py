@@ -4,7 +4,7 @@ from collections import deque
 from itertools import cycle
 import matplotlib
 import matplotlib.cm as cm
-from myenv import *
+from myenv._render import *
 class MicroMM(gym.Env):
     def __init__(self):
         self.starttime = time.time()

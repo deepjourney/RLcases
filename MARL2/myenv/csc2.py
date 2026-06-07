@@ -1,7 +1,7 @@
 import numpy as np
 import random, gym, gym.spaces, json, easydict, time, sys, cv2
 from pprint import pprint
-from myenv import *
+from myenv._render import *
 
 from pysc2.env import sc2_env
 from pysc2 import maps

@@ -1,7 +1,7 @@
 import numpy as np
 import random, gym, gym.spaces, json, easydict, time, sys, cv2, copy
 from pprint import pprint
-from myenv import *
+from myenv._render import *
 from kaggle_environments import make
 from kaggle_environments.envs.halite.helpers import *
 HALITE,YARDS,SHIPS,POS,CARGO = 0,1,2,0,1

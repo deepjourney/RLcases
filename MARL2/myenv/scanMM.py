@@ -3,7 +3,7 @@ import random, gym, gym.spaces, json, easydict, time, cv2, scipy
 from itertools import cycle
 import matplotlib
 import matplotlib.cm as cm
-from myenv import *
+from myenv._render import *
 class ScanMM(gym.Env):
     def __init__(self):
         self.walls=[]
